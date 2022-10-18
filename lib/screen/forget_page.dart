@@ -9,14 +9,12 @@ class ForgetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var orientation = MediaQuery.of(context).orientation;
     var size = MediaQuery.of(context).size;
-    var height = size.height;
     var width = size.width;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Lupa Password",
           style: TextStyle(
             fontSize: 22,
@@ -28,33 +26,33 @@ class ForgetPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Email",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             TextFormField(
               validator: (value) => Validator.validateField(value: value!),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Masukkan email anda..',
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: Color(0x5F5F58),
+                    color: Color(0xFF5F5F58),
                   ),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             SizedBox(
               width: width,
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text("Kirim Email"),
+                child: const Text("Kirim Email"),
               ),
             ),
           ],

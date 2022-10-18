@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:mini_project/screen/detail_menu_page.dart';
 import 'package:mini_project/screen/forget_page.dart';
 import 'package:mini_project/screen/home_page.dart';
 import 'package:mini_project/screen/login_page.dart';
+import 'package:mini_project/screen/order_page.dart';
 import 'package:mini_project/screen/register_page.dart';
 import 'res/custom_color.dart';
 
@@ -30,6 +33,7 @@ class MyApp extends StatelessWidget {
         HomePage.routeName: (context) => HomePage(),
         ForgetPage.routeName: (context) => ForgetPage(),
         DetailMenuPage.routeName: (context) => DetailMenuPage(),
+        OrderPage.routeName: (context) => OrderPage(),
       },
     );
   }

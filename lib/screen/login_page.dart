@@ -19,14 +19,12 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    var orientation = MediaQuery.of(context).orientation;
     var size = MediaQuery.of(context).size;
-    var height = size.height;
     var width = size.width;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Login",
           style: TextStyle(
             fontSize: 22,
@@ -39,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Email",
                 style: TextStyle(
                   fontSize: 16,
@@ -49,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 4),
               TextFormField(
                 validator: (value) => Validator.validateField(value: value!),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Masukkan email anda..',
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -58,21 +56,21 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 12),
-              Text(
+              const SizedBox(height: 12),
+              const Text(
                 "Password",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               TextFormField(
                 validator: (value) => Validator.validatePassword(pw: value!),
                 obscureText: _obscure,
                 decoration: InputDecoration(
                   hintText: 'Masukkan password anda..',
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                     borderSide: BorderSide(
                       color: CustomColors.neutralColor,
                     ),
@@ -98,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                   TextButton(
                     onPressed: () =>
                         Navigator.pushNamed(context, ForgetPage.routeName),
-                    child: Text(
+                    child: const Text(
                       "Lupa Password?",
                       style: TextStyle(
                         fontSize: 12,
@@ -114,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     Navigator.popAndPushNamed(context, HomePage.routeName);
                   },
-                  child: Text("Login"),
+                  child: const Text("Login"),
                 ),
               ),
               SizedBox(
@@ -122,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: ElevatedButton(
                   onPressed: () => Navigator.popAndPushNamed(
                       context, RegisterPage.routeName),
-                  child: Text("Belum punya akun? Daftar"),
+                  child: const Text("Belum punya akun? Daftar"),
                 ),
               ),
             ],

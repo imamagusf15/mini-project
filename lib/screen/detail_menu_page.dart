@@ -9,7 +9,7 @@ class DetailMenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Paket A"),
+        title: const Text("Paket A"),
       ),
     );
   }
