@@ -11,6 +11,7 @@ class Menu {
     required this.menuPrice,
     required this.isPackage,
   });
+}
 
 List<Menu> menuList = [
   Menu(
