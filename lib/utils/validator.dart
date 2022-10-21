@@ -9,7 +9,7 @@ class Validator {
 
   static String? validatePassword({required String pw}) {
     if (pw.isEmpty) {
-      return 'Password tidak boleh kosong';
+      return 'Field tidak boleh kosong';
     } else if (pw.length <= 8) {
       return 'Password tidak boleh kurang dari 8 karakter';
     }

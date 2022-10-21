@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project/model/page_route.dart';
 import 'package:mini_project/res/custom_color.dart';
-import 'package:mini_project/screen/forget_page.dart';
-import 'package:mini_project/screen/home_page.dart';
-import 'package:mini_project/screen/register_page.dart';
 import 'package:mini_project/utils/validator.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
-
-  static const routeName = '/login-page';
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -44,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               TextFormField(
                 validator: (value) => Validator.validateField(value: value!),
                 decoration: const InputDecoration(
@@ -95,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   TextButton(
                     onPressed: () =>
-                        Navigator.pushNamed(context, ForgetPage.routeName),
+                        Navigator.of(context).pushNamed(forgetPasswordPage),
                     child: const Text(
                       "Lupa Password?",
                       style: TextStyle(
@@ -110,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                 width: width,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.popAndPushNamed(context, HomePage.routeName);
+                    Navigator.of(context).popAndPushNamed(wrapperPage);
                   },
                   child: const Text("Login"),
                 ),
@@ -118,8 +114,8 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: width,
                 child: ElevatedButton(
-                  onPressed: () => Navigator.popAndPushNamed(
-                      context, RegisterPage.routeName),
+                  onPressed: () =>
+                      Navigator.of(context).popAndPushNamed(registerPage),
                   child: const Text("Belum punya akun? Daftar"),
                 ),
               ),

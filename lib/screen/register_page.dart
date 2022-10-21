@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project/model/page_route.dart';
 import 'package:mini_project/res/custom_color.dart';
-import 'package:mini_project/screen/login_page.dart';
 import 'package:mini_project/utils/validator.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
-
-  static const routeName = '/register-page';
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -23,19 +21,18 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    var orientation = MediaQuery.of(context).orientation;
     var size = MediaQuery.of(context).size;
-    var height = size.height;
     var width = size.width;
 
-    var outlineInputBorder = OutlineInputBorder(
+    var outlineInputBorder = const OutlineInputBorder(
       borderSide: BorderSide(
-        color: Color(0x5F5F58),
+        color: Color(0xFF5F5F58),
       ),
     );
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Daftar",
           style: TextStyle(fontSize: 22),
         ),
@@ -46,14 +43,14 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Nama",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               TextFormField(
                 validator: (value) => Validator.validateField(value: value!),
                 controller: _controllerNama,
@@ -62,15 +59,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: outlineInputBorder,
                 ),
               ),
-              SizedBox(height: 12),
-              Text(
+              const SizedBox(height: 12),
+              const Text(
                 "Email",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               TextFormField(
                 validator: (value) => Validator.validateField(value: value!),
                 controller: _controllerEmail,
@@ -79,15 +76,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: outlineInputBorder,
                 ),
               ),
-              SizedBox(height: 12),
-              Text(
+              const SizedBox(height: 12),
+              const Text(
                 "Password",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               TextFormField(
                 validator: (value) => Validator.validatePassword(pw: value!),
                 controller: _controllerPassword,
@@ -110,7 +107,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: outlineInputBorder,
                 ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               TextFormField(
                 obscureText: _obscure2,
                 validator: (value) => Validator.validatePassword(pw: value!),
@@ -133,20 +130,20 @@ class _RegisterPageState extends State<RegisterPage> {
                   border: outlineInputBorder,
                 ),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               SizedBox(
                 width: width,
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: Text("Buat Akun"),
+                  child: const Text("Buat Akun"),
                 ),
               ),
               SizedBox(
                 width: width,
                 child: ElevatedButton(
                   onPressed: () =>
-                      Navigator.popAndPushNamed(context, LoginPage.routeName),
-                  child: Text("Sudah punya akun? Login"),
+                      Navigator.of(context).popAndPushNamed(loginPage),
+                  child: const Text("Sudah punya akun? Login"),
                 ),
               ),
             ],

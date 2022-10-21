@@ -1,12 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:mini_project/screen/detail_menu_page.dart';
-import 'package:mini_project/screen/forget_page.dart';
-import 'package:mini_project/screen/home_page.dart';
-import 'package:mini_project/screen/login_page.dart';
-import 'package:mini_project/screen/order_page.dart';
-import 'package:mini_project/screen/register_page.dart';
+import 'package:mini_project/model/page_route.dart';
+import 'package:mini_project/screen/wrapper_page.dart';
 import 'res/custom_color.dart';
 
 void main() {
@@ -26,15 +22,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: CustomColors.tertiaryColor,
         scaffoldBackgroundColor: CustomColors.primaryColor,
       ),
-      home: const HomePage(),
-      routes: <String, WidgetBuilder>{
-        RegisterPage.routeName: (context) => RegisterPage(),
-        LoginPage.routeName: (context) => LoginPage(),
-        HomePage.routeName: (context) => HomePage(),
-        ForgetPage.routeName: (context) => ForgetPage(),
-        DetailMenuPage.routeName: (context) => DetailMenuPage(),
-        OrderPage.routeName: (context) => OrderPage(),
-      },
+      routes: routes,
+      home: const WrapperPage(),
     );
   }
 }

@@ -5,8 +5,6 @@ import 'package:mini_project/utils/validator.dart';
 class ForgetPage extends StatelessWidget {
   const ForgetPage({super.key});
 
-  static const routeName = '/forget-password-page';
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
