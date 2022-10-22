@@ -4,7 +4,7 @@ class Order extends Menu {
   final String orderId;
   final String? userNote;
   final int totalOrder;
-  List<Menu> menuData = menuList;
+  int? totalPrice;
 
   Order({
     required this.orderId,
@@ -16,6 +16,7 @@ class Order extends Menu {
     required super.menuImg,
     required super.menuPrice,
     required super.isPackage,
+    this.totalPrice,
   });
 }
 

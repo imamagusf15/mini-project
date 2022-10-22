@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:mini_project/model/page_route.dart';
+import 'package:mini_project/utils/page_route.dart';
 import 'package:mini_project/screen/wrapper_page.dart';
 import 'res/custom_color.dart';
 

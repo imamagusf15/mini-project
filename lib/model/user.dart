@@ -1,10 +1,10 @@
 class User {
   final String userId, userName;
-  int? userBalance;
+  final int userBalance;
 
   User({
     required this.userId,
     required this.userName,
-    this.userBalance,
+    required this.userBalance,
   });
 }

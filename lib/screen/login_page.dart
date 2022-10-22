@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project/model/page_route.dart';
+import 'package:mini_project/utils/page_route.dart';
 import 'package:mini_project/res/custom_color.dart';
 import 'package:mini_project/utils/validator.dart';
+import 'package:mini_project/widgets/input_form_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -41,18 +42,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 4),
-              TextFormField(
-                validator: (value) => Validator.validateField(value: value!),
-                decoration: const InputDecoration(
-                  hintText: 'Masukkan email anda..',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: CustomColors.neutralColor,
-                    ),
-                  ),
-                ),
+              const InputFormField(
+                hintText: 'Masukkan email anda..',
+                helperText: '',
+                obscureText: false,
+                suffixIcon: SizedBox(),
               ),
-              const SizedBox(height: 12),
               const Text(
                 "Password",
                 style: TextStyle(
@@ -61,46 +56,37 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 4),
-              TextFormField(
-                validator: (value) => Validator.validatePassword(pw: value!),
+              InputFormField(
                 obscureText: _obscure,
-                decoration: InputDecoration(
-                  hintText: 'Masukkan password anda..',
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide(
+                hintText: 'Masukkan password anda..',
+                helperText: '',
+                suffixIcon: IconButton(
+                  color: CustomColors.neutralColor,
+                  icon: Icon(
+                    (_obscure == true)
+                        ? Icons.visibility
+                        : Icons.visibility_outlined,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscure = !_obscure;
+                    });
+                  },
+                ),
+              ),
+              Container(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () =>
+                      Navigator.of(context).pushNamed(forgetPasswordPage),
+                  child: const Text(
+                    "Lupa Password?",
+                    style: TextStyle(
+                      fontSize: 12,
                       color: CustomColors.neutralColor,
                     ),
                   ),
-                  suffixIcon: IconButton(
-                    color: CustomColors.neutralColor,
-                    onPressed: () {
-                      setState(() {
-                        _obscure = !_obscure;
-                      });
-                    },
-                    icon: Icon(
-                      (_obscure == true)
-                          ? Icons.visibility
-                          : Icons.visibility_outlined,
-                    ),
-                  ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(forgetPasswordPage),
-                    child: const Text(
-                      "Lupa Password?",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: CustomColors.neutralColor,
-                      ),
-                    ),
-                  ),
-                ],
               ),
               SizedBox(
                 width: width,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project/model/page_route.dart';
+import 'package:mini_project/utils/page_route.dart';
 import 'package:mini_project/res/custom_color.dart';
 
 import '../../widgets/card_menu.dart';
@@ -12,8 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                                 MaterialStatePropertyAll<Color>(Colors.black),
                           ),
                           onPressed: () =>
-                              Navigator.of(context).pushNamed(registerPage),
+                              Navigator.of(context).popAndPushNamed(loginPage),
                           icon: const Icon(Icons.logout),
                           label: const Text("Logout"),
                         ),

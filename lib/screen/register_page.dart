@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project/model/page_route.dart';
+import 'package:mini_project/utils/page_route.dart';
 import 'package:mini_project/res/custom_color.dart';
-import 'package:mini_project/utils/validator.dart';
+import 'package:mini_project/widgets/input_form_field.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -14,21 +14,10 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _obscure = true;
   bool _obscure2 = true;
 
-  final _controllerNama = TextEditingController();
-  final _controllerEmail = TextEditingController();
-  final _controllerPassword = TextEditingController();
-  final _ctrlConfirmPassword = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var width = size.width;
-
-    var outlineInputBorder = const OutlineInputBorder(
-      borderSide: BorderSide(
-        color: Color(0xFF5F5F58),
-      ),
-    );
 
     return Scaffold(
       appBar: AppBar(
@@ -37,9 +26,9 @@ class _RegisterPageState extends State<RegisterPage> {
           style: TextStyle(fontSize: 22),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -51,15 +40,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               const SizedBox(height: 4),
-              TextFormField(
-                validator: (value) => Validator.validateField(value: value!),
-                controller: _controllerNama,
-                decoration: InputDecoration(
-                  hintText: 'Masukkan nama lengkap anda..',
-                  border: outlineInputBorder,
-                ),
+              const InputFormField(
+                hintText: 'Masukkan nama lengkap anda..',
+                helperText: '',
+                obscureText: false,
+                suffixIcon: SizedBox(),
               ),
-              const SizedBox(height: 12),
               const Text(
                 "Email",
                 style: TextStyle(
@@ -68,13 +54,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               const SizedBox(height: 4),
-              TextFormField(
-                validator: (value) => Validator.validateField(value: value!),
-                controller: _controllerEmail,
-                decoration: InputDecoration(
-                  hintText: 'Masukkan email anda..',
-                  border: outlineInputBorder,
-                ),
+              const InputFormField(
+                hintText: 'Masukkan email anda..',
+                helperText: 'contoh: email@gmail.com',
+                obscureText: false,
+                suffixIcon: SizedBox(),
               ),
               const SizedBox(height: 12),
               const Text(
@@ -85,56 +69,49 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               const SizedBox(height: 4),
-              TextFormField(
-                validator: (value) => Validator.validatePassword(pw: value!),
-                controller: _controllerPassword,
+              InputFormField(
+                hintText: 'Masukkan password anda..',
+                helperText: 'contoh: pwsd123',
                 obscureText: _obscure,
-                decoration: InputDecoration(
-                  hintText: 'Masukkan password anda..',
-                  suffixIcon: IconButton(
-                    color: CustomColors.neutralColor,
-                    onPressed: () {
-                      setState(() {
-                        _obscure = !_obscure;
-                      });
-                    },
-                    icon: Icon(
-                      (_obscure == true)
-                          ? Icons.visibility
-                          : Icons.visibility_outlined,
-                    ),
+                suffixIcon: IconButton(
+                  color: CustomColors.neutralColor,
+                  onPressed: () {
+                    setState(() {
+                      _obscure = !_obscure;
+                    });
+                  },
+                  icon: Icon(
+                    (_obscure == true)
+                        ? Icons.visibility
+                        : Icons.visibility_outlined,
                   ),
-                  border: outlineInputBorder,
                 ),
               ),
               const SizedBox(height: 4),
-              TextFormField(
+              InputFormField(
+                hintText: 'Konfirmasi password anda..',
+                helperText: '',
                 obscureText: _obscure2,
-                validator: (value) => Validator.validatePassword(pw: value!),
-                controller: _ctrlConfirmPassword,
-                decoration: InputDecoration(
-                  hintText: 'Konfirmasi password anda..',
-                  suffixIcon: IconButton(
-                    color: CustomColors.neutralColor,
-                    onPressed: () {
-                      setState(() {
-                        _obscure2 = !_obscure2;
-                      });
-                    },
-                    icon: Icon(
-                      (_obscure2 == true)
-                          ? Icons.visibility
-                          : Icons.visibility_outlined,
-                    ),
+                suffixIcon: IconButton(
+                  color: CustomColors.neutralColor,
+                  onPressed: () {
+                    setState(() {
+                      _obscure2 = !_obscure2;
+                    });
+                  },
+                  icon: Icon(
+                    (_obscure2 == true)
+                        ? Icons.visibility
+                        : Icons.visibility_outlined,
                   ),
-                  border: outlineInputBorder,
                 ),
               ),
               const SizedBox(height: 24),
               SizedBox(
                 width: width,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      Navigator.of(context).popAndPushNamed(wrapperPage),
                   child: const Text("Buat Akun"),
                 ),
               ),
