@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mini_project/model/user_model.dart';
+import 'package:mini_project/utils/firebase_auth_service.dart';
 import 'package:mini_project/utils/page_route.dart';
 import 'package:mini_project/res/custom_color.dart';
 import 'package:mini_project/utils/validator.dart';
@@ -12,7 +15,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool _obscure = true;
+  bool obscureText = true;
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  final auth = Auth();
+  final firebaseAuth = FirebaseAuth.instance;
+  final validator = Validator();
+
+  final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +33,7 @@ class _LoginPageState extends State<LoginPage> {
     var width = size.width;
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: const Text(
           "Login",
@@ -28,9 +42,10 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -41,12 +56,13 @@ class _LoginPageState extends State<LoginPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 4),
-              const InputFormField(
+              InputFormField(
+                validator: (value) => validator.validateEmail(email: value!),
+                controller: emailController,
                 hintText: 'Masukkan email anda..',
                 helperText: '',
                 obscureText: false,
-                suffixIcon: SizedBox(),
+                suffixIcon: const SizedBox(),
               ),
               const Text(
                 "Password",
@@ -57,19 +73,22 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 4),
               InputFormField(
-                obscureText: _obscure,
+                validator: (value) =>
+                    validator.validatePassword(password: value!),
+                controller: passwordController,
+                obscureText: obscureText,
                 hintText: 'Masukkan password anda..',
                 helperText: '',
                 suffixIcon: IconButton(
                   color: CustomColors.neutralColor,
                   icon: Icon(
-                    (_obscure == true)
+                    obscureText == true
                         ? Icons.visibility
                         : Icons.visibility_outlined,
                   ),
                   onPressed: () {
                     setState(() {
-                      _obscure = !_obscure;
+                      obscureText = !obscureText;
                     });
                   },
                 ),
@@ -91,8 +110,18 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: width,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).popAndPushNamed(wrapperPage);
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      UserModel? user = await auth.signInWithEmailAndPassword(
+                        email: emailController.text,
+                        password: passwordController.text,
+                        context: context,
+                      );
+                      if (user != null) {
+                        if (!mounted) return;
+                        Navigator.of(context).pushReplacementNamed(wrapperPage);
+                      }
+                    }
                   },
                   child: const Text("Login"),
                 ),

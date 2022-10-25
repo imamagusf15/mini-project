@@ -1,17 +1,25 @@
 class Validator {
-  static String? validateField({required String value}) {
-    if (value.isEmpty) {
+  String? validateField({required String field}) {
+    if (field.isEmpty) {
       return 'Field tidak boleh kosong';
     }
 
     return null;
   }
 
-  static String? validatePassword({required String pw}) {
-    if (pw.isEmpty) {
-      return 'Field tidak boleh kosong';
-    } else if (pw.length <= 8) {
-      return 'Password tidak boleh kurang dari 8 karakter';
+  String? validateEmail({required String email}) {
+    if (email.isEmpty) {
+      return 'Email tidak boleh kosong';
+    }
+
+    return null;
+  }
+
+  String? validatePassword({required String password}) {
+    if (password.isEmpty) {
+      return 'Password tidak boleh kosong';
+    } else if (password.length < 6) {
+      return 'Password minimal 6 karakter';
     }
 
     return null;

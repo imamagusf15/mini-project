@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project/res/custom_color.dart';
+import 'package:mini_project/utils/validator.dart';
 
 class InputFormField extends StatefulWidget {
   const InputFormField({
     super.key,
+    required this.validator,
+    required this.controller,
     required this.hintText,
     required this.helperText,
     required this.obscureText,
     required this.suffixIcon,
   });
 
+  final String? Function(String?)? validator;
+  final TextEditingController controller;
   final String hintText;
   final String helperText;
   final Widget suffixIcon;
@@ -20,10 +25,13 @@ class InputFormField extends StatefulWidget {
 }
 
 class _InputFormFieldState extends State<InputFormField> {
+  final validator = Validator();
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: widget.validator,
       obscureText: widget.obscureText,
+      controller: widget.controller,
       decoration: InputDecoration(
         hintText: widget.hintText,
         border: const OutlineInputBorder(

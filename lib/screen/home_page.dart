@@ -1,19 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mini_project/model/user_model.dart';
+import 'package:mini_project/provider/all_menu.dart';
+import 'package:mini_project/utils/currency_format.dart';
 import 'package:mini_project/utils/page_route.dart';
 import 'package:mini_project/res/custom_color.dart';
+import 'package:provider/provider.dart';
+import 'package:mini_project/widgets/card_menu.dart';
 
-import '../../widgets/card_menu.dart';
-
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
   Widget build(BuildContext context) {
+    final auth = FirebaseAuth.instance;
+    final user = UserModel(
+      uid: auth.currentUser!.uid,
+      email: auth.currentUser!.email!,
+      name: auth.currentUser!.displayName!,
+    );
+    final menuData = Provider.of<ListMenu>(context, listen: false).menuList;
     return Scaffold(
       body: ListView(
         children: [
@@ -37,9 +43,9 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Selamat Pagi,\nImam",
-                            style: TextStyle(
+                          Text(
+                            "Halo,\n${user.name}",
+                            style: const TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.bold,
                             ),
@@ -47,11 +53,14 @@ class _HomePageState extends State<HomePage> {
                           GestureDetector(
                             onTap: () {},
                             child: ClipOval(
-                              child: Image.asset(
-                                'asset/bihun.jpg',
-                                height: 80,
-                                width: 80,
-                                fit: BoxFit.fill,
+                              child: Container(
+                                height: 96,
+                                width: 96,
+                                color: Colors.white,
+                                child: Image.asset(
+                                  'asset/logokatering.png',
+                                  fit: BoxFit.fill,
+                                ),
                               ),
                             ),
                           ),
@@ -62,10 +71,13 @@ class _HomePageState extends State<HomePage> {
                         contentPadding: const EdgeInsets.all(0),
                         leading: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text("Saldo", style: TextStyle(fontSize: 16)),
-                            Text("Rp. 0",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
+                          children: [
+                            const Text("Saldo", style: TextStyle(fontSize: 16)),
+                            Text(
+                                CurrencyFormat.convertToIdr(
+                                    user.balance + 50000, 2),
+                                style: const TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold)),
                           ],
                         ),
                         trailing: TextButton.icon(
@@ -73,8 +85,10 @@ class _HomePageState extends State<HomePage> {
                             foregroundColor:
                                 MaterialStatePropertyAll<Color>(Colors.black),
                           ),
-                          onPressed: () =>
-                              Navigator.of(context).popAndPushNamed(loginPage),
+                          onPressed: () {
+                            auth.signOut();
+                            Navigator.of(context).popAndPushNamed(loginPage);
+                          },
                           icon: const Icon(Icons.logout),
                           label: const Text("Logout"),
                         ),
@@ -90,7 +104,22 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
-              const CardMenuPaket(),
+              ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: menuData.length,
+                itemBuilder: (context, index) {
+                  if (menuData[index].isPackage == true) {
+                    return ChangeNotifierProvider.value(
+                      value: menuData[index],
+                      child: const CardMenuPaket(),
+                    );
+                  } else {
+                    return const SizedBox();
+                  }
+                },
+              ),
               const Padding(
                 padding: EdgeInsets.fromLTRB(16, 20, 16, 4),
                 child: Text(
@@ -98,7 +127,26 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
-              const CardMenuLain(),
+              SizedBox(
+                height: 120,
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  clipBehavior: Clip.none,
+                  itemCount: menuData.length,
+                  itemBuilder: (context, index) {
+                    if (menuData[index].isPackage == false) {
+                      return ChangeNotifierProvider.value(
+                        value: menuData[index],
+                        child: const CardMenuLain(),
+                      );
+                    } else {
+                      return const SizedBox();
+                    }
+                  },
+                ),
+              ),
             ],
           ),
         ],

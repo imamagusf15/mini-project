@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project/model/order.dart';
+import 'package:mini_project/provider/all_order.dart';
 import 'package:mini_project/utils/currency_format.dart';
+import 'package:provider/provider.dart';
 
 class DetailOrderPage extends StatelessWidget {
   const DetailOrderPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final order = ModalRoute.of(context)!.settings.arguments as Order;
+    final orderId = ModalRoute.of(context)!.settings.arguments as String;
+    final orderData = Provider.of<ListOrder>(context)
+        .listOrder
+        .firstWhere((element) => element.orderId == orderId);
+    // .firstWhere((order_id) => order_id.orderId == orderId)
 
     var size = MediaQuery.of(context).size;
     var width = size.width;
@@ -25,7 +30,7 @@ class DetailOrderPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
             child: Text(
-              order.menuName,
+              orderData.menuName,
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -34,14 +39,14 @@ class DetailOrderPage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text("${order.totalOrder} buah"),
+            child: Text("${orderData.totalOrder} buah"),
           ),
           const SizedBox(height: 8),
           SizedBox(
             height: 150,
             width: width,
             child: Image.asset(
-              order.menuImg,
+              orderData.menuImg,
               fit: BoxFit.fitWidth,
             ),
           ),
@@ -58,7 +63,7 @@ class DetailOrderPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              CurrencyFormat.convertToIdr(order.totalPrice, 2),
+              CurrencyFormat.convertToIdr(orderData.totalPrice, 2),
               style: const TextStyle(
                 fontSize: 16,
               ),

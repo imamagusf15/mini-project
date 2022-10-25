@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "525037677338",
+    "project_id": "katering-order-app",
+    "storage_bucket": "katering-order-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525037677338:android:3cdae23bc6241eee12daa3",
+        "android_client_info": {
+          "package_name": "com.example.mini_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525037677338-srbm16ai13bk55d9rnuh5bec1e3318qc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mini_project",
+            "certificate_hash": "007e5ff7051288025995f98fca338bcbbe41de7d"
+          }
+        },
+        {
+          "client_id": "525037677338-lcr8hn4uplpmr4nufuioj30rh54hmi3k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYSZHXHh-aiSnABLLx0GiN3t0PREHTsDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525037677338-lcr8hn4uplpmr4nufuioj30rh54hmi3k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "525037677338-eboj8fkha91brh139n532qa6hur1b17c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.miniProject"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

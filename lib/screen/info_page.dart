@@ -27,11 +27,14 @@ class _InfoPageState extends State<InfoPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ClipOval(
-                  child: Image.asset(
-                    'asset/tahuisi.png',
-                    fit: BoxFit.fill,
+                  child: Container(
                     height: 96,
                     width: 96,
+                    color: Colors.white,
+                    child: Image.asset(
+                      'asset/logokatering.png',
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),

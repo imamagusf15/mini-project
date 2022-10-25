@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:mini_project/utils/validator.dart';
+import 'package:mini_project/widgets/input_form_field.dart';
 
 class ForgetPage extends StatelessWidget {
   const ForgetPage({super.key});
@@ -9,6 +11,9 @@ class ForgetPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var width = size.width;
+
+    final emailController = TextEditingController();
+    final validator = Validator();
 
     return Scaffold(
       appBar: AppBar(
@@ -32,16 +37,13 @@ class ForgetPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            TextFormField(
-              validator: (value) => Validator.validateField(value: value!),
-              decoration: const InputDecoration(
-                hintText: 'Masukkan email anda..',
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color(0xFF5F5F58),
-                  ),
-                ),
-              ),
+            InputFormField(
+              validator: (value) => validator.validateEmail(email: value!),
+              controller: emailController,
+              hintText: 'Masukkan email anda..',
+              helperText: '',
+              obscureText: false,
+              suffixIcon: const SizedBox(),
             ),
             const SizedBox(
               height: 24,
@@ -49,7 +51,10 @@ class ForgetPage extends StatelessWidget {
             SizedBox(
               width: width,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  FirebaseAuth.instance
+                      .sendPasswordResetEmail(email: emailController.text);
+                },
                 child: const Text("Kirim Email"),
               ),
             ),

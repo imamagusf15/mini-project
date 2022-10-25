@@ -54,7 +54,6 @@ class _WrapperPageState extends State<WrapperPage> {
         onTap: (index) {
           setState(() {
             _currentIndex = index;
-            print(Navigator.of(context).canPop());
           });
         },
       ),

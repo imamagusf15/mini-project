@@ -1,11 +1,24 @@
-// ignore_for_file: prefer_const_constructors
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mini_project/utils/page_route.dart';
+import 'package:mini_project/provider/all_menu.dart';
+import 'package:mini_project/provider/all_order.dart';
+import 'package:mini_project/screen/home_page.dart';
+import 'package:mini_project/screen/login_page.dart';
 import 'package:mini_project/screen/wrapper_page.dart';
-import 'res/custom_color.dart';
+import 'package:mini_project/utils/firebase_auth_service.dart';
+import 'package:mini_project/utils/page_route.dart';
+import 'package:provider/provider.dart';
+import 'package:mini_project/res/custom_color.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  Provider.debugCheckInvalidValueType = null;
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
@@ -15,15 +28,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: CustomColors.tertiaryColor,
-        scaffoldBackgroundColor: CustomColors.primaryColor,
+    User? user = FirebaseAuth.instance.currentUser;
+    return MultiProvider(
+      providers: [
+        Provider<ListMenu>(create: (context) => ListMenu()),
+        Provider<ListOrder>(create: (context) => ListOrder()),
+        Provider<Auth>(create: (context) => Auth())
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          brightness: Brightness.light,
+          primarySwatch: CustomColors.tertiaryColor,
+          scaffoldBackgroundColor: CustomColors.primaryColor,
+        ),
+        routes: routes,
+        home: user != null ? const WrapperPage() : const LoginPage(),
       ),
-      routes: routes,
-      home: const WrapperPage(),
     );
   }
 }
