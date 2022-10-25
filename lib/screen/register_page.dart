@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mini_project/model/user_model.dart';
@@ -112,23 +111,16 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        try {
-                          UserModel? user =
-                              await auth.createUserWithEmailAndPassword(
-                            name: nameController.text,
-                            email: emailController.text,
-                            password: passwordController.text,
-                          );
-                          if (user != null) {
-                            if (!mounted) return;
-                            Navigator.of(context)
-                                .pushReplacementNamed(wrapperPage);
-                          }
-                        } on PlatformException catch (e) {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                            content: Text("Email "),
-                          ));
+                        UserModel? user =
+                            await auth.createUserWithEmailAndPassword(
+                          name: nameController.text,
+                          email: emailController.text,
+                          password: passwordController.text,
+                        );
+                        if (user != null) {
+                          if (!mounted) return;
+                          Navigator.of(context)
+                              .pushReplacementNamed(wrapperPage);
                         }
                       }
                     },
