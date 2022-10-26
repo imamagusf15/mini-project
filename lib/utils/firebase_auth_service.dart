@@ -43,9 +43,12 @@ class Auth {
       );
       user = userCredential.user;
     } on FirebaseAuthException {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Email atau Password salah!"),
-      ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.redAccent,
+          content: Text("Email atau Password salah!"),
+        ),
+      );
     }
 
     return _userFromFirebase(user);
@@ -55,6 +58,7 @@ class Auth {
     required String name,
     required String email,
     required String password,
+    required BuildContext context,
   }) async {
     User? user;
     try {
@@ -67,21 +71,34 @@ class Auth {
       await user!.updateDisplayName(name);
       await user.reload();
       user = _firebaseAuth.currentUser;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
-    } catch (e) {
-      print(e);
+    } on FirebaseAuthException {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.redAccent,
+          content: Text("Email salah atau telah terdaftar!"),
+        ),
+      );
     }
     return _userFromFirebase(user);
   }
 
   Future<void> sendPasswordResetEmail({
     required String email,
-  }) async {}
+    required BuildContext context,
+  }) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.redAccent,
+          content: Text(
+            "Email salah atau tidak terdaftar!",
+          ),
+        ),
+      );
+    }
+  }
 
   Future<void> signOut() async {
     return await _firebaseAuth.signOut();

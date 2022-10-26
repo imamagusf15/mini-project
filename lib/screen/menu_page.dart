@@ -54,7 +54,6 @@ class _MenuPageState extends State<MenuPage> {
         onTap: (index) {
           setState(() {
             _currentIndex = index;
-            print("build");
           });
         },
       ),

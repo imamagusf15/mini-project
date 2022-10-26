@@ -19,7 +19,9 @@ class HomePage extends StatelessWidget {
       email: auth.currentUser!.email!,
       name: auth.currentUser!.displayName!,
     );
+
     final menuData = Provider.of<ListMenu>(context, listen: false).menuList;
+
     return Scaffold(
       body: ListView(
         children: [

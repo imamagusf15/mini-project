@@ -37,8 +37,6 @@ class _DropDownFieldState extends State<DropDownField> {
               onChanged: (String? newValue) {
                 setState(() {
                   _currentSelectedValue = newValue;
-                  //state.didChange(newValue);
-                  //print(state.value);
                 });
               },
               items: widget.menu.map((String value) {

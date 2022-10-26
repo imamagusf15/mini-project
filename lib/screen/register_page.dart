@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mini_project/model/user_model.dart';
 import 'package:mini_project/utils/firebase_auth_service.dart';
 import 'package:mini_project/utils/page_route.dart';
@@ -97,7 +96,11 @@ class _RegisterPageState extends State<RegisterPage> {
                   obscureText: obscureText,
                   suffixIcon: IconButton(
                     color: CustomColors.neutralColor,
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        obscureText = !obscureText;
+                      });
+                    },
                     icon: Icon(
                       (obscureText == true)
                           ? Icons.visibility
@@ -116,6 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           name: nameController.text,
                           email: emailController.text,
                           password: passwordController.text,
+                          context: context,
                         );
                         if (user != null) {
                           if (!mounted) return;

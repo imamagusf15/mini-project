@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:mini_project/model/order.dart';
+import 'package:mini_project/provider/all_menu.dart';
 import 'package:mini_project/utils/page_route.dart';
 import 'package:mini_project/utils/validator.dart';
 import 'package:mini_project/widgets/drop_down_field.dart';
@@ -16,16 +16,6 @@ class CreateOrderPage extends StatefulWidget {
 }
 
 class _CreateOrderPageState extends State<CreateOrderPage> {
-  final menu = [
-    "Paket A",
-    "Paket B",
-    "Paket C",
-    "Lontong Isi",
-    "Tahu Isi",
-    "Mie Goreng",
-    "Bihun Goreng"
-  ];
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -37,6 +27,13 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
     final noteController = TextEditingController();
 
     final validator = Validator();
+
+    final menuName = Provider.of<ListMenu>(context).menuList;
+
+    final List<String> menuNameList = [];
+    for (int i = 0; i < menuName.length; i++) {
+      menuNameList.add(menuName.elementAt(i).menuName);
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +56,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
             ),
             const SizedBox(height: 4),
             DropDownField(
-              menu: menu,
+              menu: menuNameList,
               hintText: 'Pilih jenis makanan..',
             ),
             const SizedBox(height: 4),
