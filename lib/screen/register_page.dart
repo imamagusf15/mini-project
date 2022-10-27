@@ -15,7 +15,6 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   bool obscureText = true;
-  bool obscureText2 = true;
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -92,7 +91,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       validator.validatePassword(password: value!),
                   controller: passwordController,
                   hintText: 'Masukkan password anda..',
-                  helperText: 'contoh: pwsd123',
+                  helperText: 'contoh: pwd123',
                   obscureText: obscureText,
                   suffixIcon: IconButton(
                     color: CustomColors.neutralColor,

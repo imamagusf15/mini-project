@@ -9,14 +9,11 @@ import 'package:mini_project/utils/page_route.dart';
 import 'package:provider/provider.dart';
 import 'package:mini_project/res/custom_color.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 Future<void> main() async {
   Provider.debugCheckInvalidValueType = null;
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp();
 
   runApp(const MyApp());
 }
@@ -28,6 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
+
     return MultiProvider(
       providers: [
         Provider<ListMenu>(create: (context) => ListMenu()),
@@ -41,7 +39,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: CustomColors.tertiaryColor,
           scaffoldBackgroundColor: CustomColors.primaryColor,
         ),
-        routes: routes,
+        routes: pageRoutes,
         home: user != null ? const WrapperPage() : const LoginPage(),
       ),
     );

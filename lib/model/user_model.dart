@@ -8,5 +8,5 @@ class UserModel with ChangeNotifier {
       {required this.uid,
       required this.email,
       required this.name,
-      this.balance = 0});
+      this.balance = 0,});
 }

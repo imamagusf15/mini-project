@@ -1,19 +1,27 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:mini_project/res/custom_color.dart';
+import 'package:mini_project/utils/firebase_auth_service.dart';
 import 'package:mini_project/utils/validator.dart';
 import 'package:mini_project/widgets/input_form_field.dart';
 
-class ForgetPage extends StatelessWidget {
+class ForgetPage extends StatefulWidget {
   const ForgetPage({super.key});
+
+  @override
+  State<ForgetPage> createState() => _ForgetPageState();
+}
+
+class _ForgetPageState extends State<ForgetPage> {
+  final emailController = TextEditingController();
+  final validator = Validator();
+  final fieldKey = GlobalKey<FormState>();
+
+  final auth = Auth();
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var width = size.width;
-
-    final emailController = TextEditingController();
-    final validator = Validator();
 
     return Scaffold(
       appBar: AppBar(
@@ -37,13 +45,16 @@ class ForgetPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            InputFormField(
-              validator: (value) => validator.validateEmail(email: value!),
-              controller: emailController,
-              hintText: 'Masukkan email anda..',
-              helperText: '',
-              obscureText: false,
-              suffixIcon: const SizedBox(),
+            Form(
+              key: fieldKey,
+              child: InputFormField(
+                validator: (value) => validator.validateEmail(email: value!),
+                controller: emailController,
+                hintText: 'Masukkan email anda..',
+                helperText: '',
+                obscureText: false,
+                suffixIcon: const SizedBox(),
+              ),
             ),
             const SizedBox(
               height: 24,
@@ -52,8 +63,20 @@ class ForgetPage extends StatelessWidget {
               width: width,
               child: ElevatedButton(
                 onPressed: () async {
-                  FirebaseAuth.instance
-                      .sendPasswordResetEmail(email: emailController.text);
+                  if (fieldKey.currentState!.validate()) {
+                    auth.sendPasswordResetEmail(
+                      email: emailController.text,
+                      context: context,
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        backgroundColor: CustomColors.tertiaryColor,
+                        content: Text(
+                          "Email berhasil terkirim!",
+                        ),
+                      ),
+                    );
+                  }
                 },
                 child: const Text("Kirim Email"),
               ),

@@ -27,10 +27,9 @@ class _InfoPageState extends State<InfoPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ClipOval(
-                  child: Container(
+                  child: SizedBox(
                     height: 96,
                     width: 96,
-                    color: Colors.white,
                     child: Image.asset(
                       'asset/logokatering.png',
                       fit: BoxFit.fill,

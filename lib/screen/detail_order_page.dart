@@ -12,7 +12,6 @@ class DetailOrderPage extends StatelessWidget {
     final orderData = Provider.of<ListOrder>(context)
         .listOrder
         .firstWhere((element) => element.orderId == orderId);
-    // .firstWhere((order_id) => order_id.orderId == orderId)
 
     var size = MediaQuery.of(context).size;
     var width = size.width;
@@ -83,7 +82,7 @@ class DetailOrderPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Flexible(
               child: Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+                "Jakarta",
                 style: TextStyle(
                   fontSize: 16,
                 ),

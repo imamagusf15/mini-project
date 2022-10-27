@@ -54,6 +54,12 @@ class DetailMenuPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
+                  (menuData.isPackage == true)
+                      ? "- Lauk 1\n- Lauk 2\n- Lauk 3\n"
+                      : "- Pilihan 1\n- Pilihan 2\n",
+                ),
+                const SizedBox(height: 16),
+                Text(
                   (menuData.isPackage == true) ? "Harga/box" : "Harga/buah",
                   style: const TextStyle(
                     fontSize: 16,

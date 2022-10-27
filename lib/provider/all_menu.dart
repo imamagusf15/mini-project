@@ -32,7 +32,7 @@ class ListMenu with ChangeNotifier {
     Menu(
       menuId: 'menu-4',
       menuName: 'Lontong Isi',
-      menuDesc: '',
+      menuDesc: 'Lontong isi dengan 2 pilihan isian wortel&kentang atau oncom',
       menuImg: 'asset/lontong.jpg',
       menuPrice: 1500,
       isPackage: false,
@@ -40,7 +40,8 @@ class ListMenu with ChangeNotifier {
     Menu(
       menuId: 'menu-5',
       menuName: 'Tahu Isi',
-      menuDesc: 's',
+      menuDesc:
+          'Tahu dengan isian sayuran segar yang terdiri dari wortel, kol, dan tauge',
       menuImg: 'asset/tahuisi.png',
       menuPrice: 1500,
       isPackage: false,
@@ -48,7 +49,8 @@ class ListMenu with ChangeNotifier {
     Menu(
       menuId: 'menu-6',
       menuName: 'Mie Goreng',
-      menuDesc: 's',
+      menuDesc:
+          'Mie telor yang digoreng dengan tambahan sayur sawi dan irisan bakso',
       menuImg: 'asset/miegoreng.jpg',
       menuPrice: 2000,
       isPackage: false,
@@ -56,7 +58,8 @@ class ListMenu with ChangeNotifier {
     Menu(
       menuId: 'menu-7',
       menuName: 'Bihun Goreng',
-      menuDesc: 's',
+      menuDesc:
+          'Bihun yang digoreng dengan tambahan irisan sayur wortel dan kol hingga irisan bakso ',
       menuImg: 'asset/bihun.jpg',
       menuPrice: 2000,
       isPackage: false,

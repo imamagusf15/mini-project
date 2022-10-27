@@ -25,7 +25,6 @@ class _LoginPageState extends State<LoginPage> {
   final validator = Validator();
 
   final _formKey = GlobalKey<FormState>();
-  final _scaffoldKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,6 @@ class _LoginPageState extends State<LoginPage> {
     var width = size.width;
 
     return Scaffold(
-      key: _scaffoldKey,
       appBar: AppBar(
         title: const Text(
           "Login",

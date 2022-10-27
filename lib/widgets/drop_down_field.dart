@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mini_project/res/custom_color.dart';
 
 class DropDownField extends StatefulWidget {
+  final List<String> menu;
+  final String hintText;
+
   const DropDownField({
     super.key,
     required this.menu,
     required this.hintText,
   });
-
-  final List<String> menu;
-  final String hintText;
 
   @override
   State<DropDownField> createState() => _DropDownFieldState();

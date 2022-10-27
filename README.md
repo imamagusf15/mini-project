@@ -1,6 +1,6 @@
 # mini_project
 
-A new Flutter project.
+Aplikasi Pemesanan Katering 
 
 ## Getting Started
 

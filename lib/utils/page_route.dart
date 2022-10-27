@@ -21,7 +21,7 @@ const String detailMenuPage = '/detail-menu';
 const String createOrderPage = '/create-order-page';
 const String wrapperPage = '/wrapper-page';
 
-Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+Map<String, WidgetBuilder> pageRoutes = <String, WidgetBuilder>{
   registerPage: (context) => const RegisterPage(),
   loginPage: (context) => const LoginPage(),
   homePage: (context) => const HomePage(),
