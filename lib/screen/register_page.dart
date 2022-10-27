@@ -101,7 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       });
                     },
                     icon: Icon(
-                      (obscureText == true)
+                      obscureText
                           ? Icons.visibility
                           : Icons.visibility_outlined,
                     ),

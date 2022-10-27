@@ -46,7 +46,7 @@ class DetailMenuPage extends StatelessWidget {
                 Text(menuData.menuDesc),
                 const SizedBox(height: 16),
                 Text(
-                  (menuData.isPackage == true) ? "Isian Lauk" : "Pilihan Isi",
+                  menuData.isPackage ? "Isian Lauk" : "Pilihan Isi",
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -54,13 +54,13 @@ class DetailMenuPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  (menuData.isPackage == true)
+                  menuData.isPackage
                       ? "- Lauk 1\n- Lauk 2\n- Lauk 3\n"
                       : "- Pilihan 1\n- Pilihan 2\n",
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  (menuData.isPackage == true) ? "Harga/box" : "Harga/buah",
+                  menuData.isPackage ? "Harga/box" : "Harga/buah",
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

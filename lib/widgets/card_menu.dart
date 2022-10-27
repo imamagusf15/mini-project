@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mini_project/model/menu.dart';
 import 'package:mini_project/model/order.dart';
 import 'package:provider/provider.dart';
-
-import '../utils/page_route.dart';
-import '../res/custom_color.dart';
-import '../utils/currency_format.dart';
+import 'package:mini_project/utils/page_route.dart';
+import 'package:mini_project/res/custom_color.dart';
+import 'package:mini_project/utils/currency_format.dart';
 
 class CardMenuPaket extends StatelessWidget {
   const CardMenuPaket({super.key});
