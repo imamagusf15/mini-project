@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:mini_project/provider/all_menu.dart';
 import 'package:mini_project/utils/page_route.dart';
@@ -66,6 +67,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
               InputFormField(
                 validator: (value) => validator.validateField(field: value!),
                 controller: totalOrder,
+                keyboardType: TextInputType.number,
                 hintText: 'Masukkan jumlah pesanan..',
                 helperText: 'contoh: 50',
                 obscureText: false,
@@ -88,6 +90,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
               InputFormField(
                 validator: (value) => validator.validateField(field: value!),
                 controller: alamatController,
+                keyboardType: TextInputType.streetAddress,
                 hintText: 'Masukkan alamat tujuan..',
                 helperText: '',
                 obscureText: false,
@@ -103,8 +106,9 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
               InputFormField(
                 validator: (value) => validator.validateField(field: value!),
                 controller: waktuController,
+                keyboardType: TextInputType.datetime,
                 hintText: 'Masukkan waktu pengiriman..',
-                helperText: 'contoh : 30/02/2035, 15.00 WIB',
+                helperText: 'contoh : 30-02-2035, 15:00 WIB',
                 obscureText: false,
                 suffixIcon: IconButton(
                     onPressed: () {
@@ -116,7 +120,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                         locale: LocaleType.id,
                         onConfirm: (time) {
                           String selectedTime =
-                              "${time.day}/${time.month}/${time.year} ${time.hour}.${time.minute} WIB";
+                              "${time.day}-${time.month}-${time.year}, ${time.hour}:${time.minute} WIB";
                           setState(() {
                             waktuController.text = selectedTime;
                           });
@@ -136,6 +140,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
               InputFormField(
                 validator: null,
                 controller: noteController,
+                keyboardType: TextInputType.text,
                 hintText: 'Masukkan catatan..',
                 helperText: '',
                 obscureText: false,

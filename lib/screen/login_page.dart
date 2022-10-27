@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mini_project/model/user_model.dart';
 import 'package:mini_project/utils/firebase_auth_service.dart';
 import 'package:mini_project/utils/page_route.dart';
@@ -57,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
               InputFormField(
                 validator: (value) => validator.validateEmail(email: value!),
                 controller: emailController,
+                keyboardType: TextInputType.emailAddress,
                 hintText: 'Masukkan email anda..',
                 helperText: '',
                 obscureText: false,
@@ -74,6 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                 validator: (value) =>
                     validator.validatePassword(password: value!),
                 controller: passwordController,
+                keyboardType: TextInputType.visiblePassword,
                 obscureText: obscureText,
                 hintText: 'Masukkan password anda..',
                 helperText: '',

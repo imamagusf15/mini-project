@@ -56,6 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 InputFormField(
                   validator: (value) => validator.validateField(field: value!),
                   controller: nameController,
+                  keyboardType: TextInputType.name,
                   hintText: 'Masukkan nama lengkap anda..',
                   helperText: '',
                   obscureText: false,
@@ -72,6 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 InputFormField(
                   validator: (value) => validator.validateEmail(email: value!),
                   controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
                   hintText: 'Masukkan email anda..',
                   helperText: 'contoh: email@gmail.com',
                   obscureText: false,
@@ -90,6 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   validator: (value) =>
                       validator.validatePassword(password: value!),
                   controller: passwordController,
+                  keyboardType: TextInputType.text,
                   hintText: 'Masukkan password anda..',
                   helperText: 'contoh: pwd123',
                   obscureText: obscureText,

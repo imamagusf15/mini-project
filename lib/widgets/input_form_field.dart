@@ -3,22 +3,24 @@ import 'package:mini_project/res/custom_color.dart';
 import 'package:mini_project/utils/validator.dart';
 
 class InputFormField extends StatefulWidget {
-  const InputFormField({
-    super.key,
-    required this.validator,
-    required this.controller,
-    required this.hintText,
-    required this.helperText,
-    required this.obscureText,
-    required this.suffixIcon,
-  });
-
   final String? Function(String?)? validator;
   final TextEditingController controller;
   final String hintText;
   final String helperText;
   final Widget suffixIcon;
   final bool obscureText;
+  final TextInputType keyboardType;
+
+  const InputFormField({
+    super.key,
+    required this.validator,
+    required this.controller,
+    required this.keyboardType,
+    required this.hintText,
+    required this.helperText,
+    required this.obscureText,
+    required this.suffixIcon,
+  });
 
   @override
   State<InputFormField> createState() => _InputFormFieldState();
@@ -32,6 +34,7 @@ class _InputFormFieldState extends State<InputFormField> {
       validator: widget.validator,
       obscureText: widget.obscureText,
       controller: widget.controller,
+      keyboardType: widget.keyboardType,
       decoration: InputDecoration(
         hintText: widget.hintText,
         border: const OutlineInputBorder(

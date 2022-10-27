@@ -50,14 +50,12 @@ class _ForgetPageState extends State<ForgetPage> {
               child: InputFormField(
                 validator: (value) => validator.validateEmail(email: value!),
                 controller: emailController,
+                keyboardType: TextInputType.emailAddress,
                 hintText: 'Masukkan email anda..',
                 helperText: '',
                 obscureText: false,
                 suffixIcon: const SizedBox(),
               ),
-            ),
-            const SizedBox(
-              height: 24,
             ),
             SizedBox(
               width: width,
