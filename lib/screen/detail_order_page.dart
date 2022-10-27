@@ -80,12 +80,10 @@ class DetailOrderPage extends StatelessWidget {
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Flexible(
-              child: Text(
-                "Jakarta",
-                style: TextStyle(
-                  fontSize: 16,
-                ),
+            child: Text(
+              "Jakarta",
+              style: TextStyle(
+                fontSize: 16,
               ),
             ),
           ),

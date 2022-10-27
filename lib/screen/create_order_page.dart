@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:mini_project/provider/all_menu.dart';
+import 'package:mini_project/provider/all_order.dart';
 import 'package:mini_project/utils/page_route.dart';
 import 'package:mini_project/utils/validator.dart';
 import 'package:mini_project/widgets/drop_down_field.dart';
@@ -162,6 +163,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
   }
 
   Future<void> _showDialogPopup() async {
+    final orderData = Provider.of<ListOrder>(context, listen: false).listOrder;
     return showDialog(
       context: context,
       barrierDismissible: false,
@@ -169,7 +171,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
         return AlertDialog(
           title: const Text('Konfirmasi Pesanan'),
           content: const Text(
-            'Pesanan akan dibuat dengan memakai saldo anda sebesar Rp. 0 sebagai uang muka.\nAnda dapat membayar sisanya setelah menerima katering.',
+            'Pesanan akan dibuat dengan memakai saldo anda sebesar 10% dari Total Harga pesanan yaitu Rp. 0 sebagai uang muka.\nAnda dapat membayar sisanya setelah menerima katering.',
             textAlign: TextAlign.justify,
           ),
           actions: <Widget>[
@@ -184,8 +186,8 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
               child: const Text(
                 'Setuju',
               ),
-              onPressed: () =>
-                  Navigator.of(context).pushReplacementNamed(wrapperPage),
+              onPressed: () => Navigator.of(context)
+                  .pushNamedAndRemoveUntil(wrapperPage, (route) => false),
             ),
           ],
         );
