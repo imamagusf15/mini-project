@@ -1,7 +1,7 @@
 import 'package:mini_project/model/menu.dart';
 
 class Order extends Menu {
-  final String orderId;
+  final String orderId, orderAddress, orderDate;
   final String? userNote;
   final int totalOrder;
   int? totalPrice;
@@ -9,6 +9,8 @@ class Order extends Menu {
   Order({
     required this.orderId,
     required this.totalOrder,
+    required this.orderAddress,
+    required this.orderDate,
     this.userNote,
     required super.menuId,
     required super.menuName,

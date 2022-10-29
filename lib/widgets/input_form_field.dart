@@ -36,6 +36,8 @@ class _InputFormFieldState extends State<InputFormField> {
       controller: widget.controller,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
         hintText: widget.hintText,
         border: const OutlineInputBorder(
           borderSide: BorderSide(

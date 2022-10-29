@@ -128,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                 width: width,
                 child: ElevatedButton(
                   onPressed: () =>
-                      Navigator.of(context).popAndPushNamed(registerPage),
+                      Navigator.of(context).pushReplacementNamed(registerPage),
                   child: const Text("Belum punya akun? Daftar"),
                 ),
               ),

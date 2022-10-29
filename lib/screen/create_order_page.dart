@@ -1,10 +1,9 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:mini_project/provider/all_menu.dart';
-import 'package:mini_project/provider/all_order.dart';
 import 'package:mini_project/utils/page_route.dart';
 import 'package:mini_project/utils/validator.dart';
-import 'package:mini_project/widgets/drop_down_field.dart';
 import 'package:mini_project/widgets/input_form_field.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +24,9 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
 
   final validator = Validator();
 
+  final List<String> menuNameList = [];
+  String? selectedItem;
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -32,7 +34,6 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
 
     final menuName = Provider.of<ListMenu>(context).menuList;
 
-    final List<String> menuNameList = [];
     for (int i = 0; i < menuName.length; i++) {
       menuNameList.add(menuName.elementAt(i).menuName);
     }
@@ -59,9 +60,25 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                 ),
               ),
               const SizedBox(height: 4),
-              DropDownField(
-                menu: menuNameList,
-                hintText: 'Pilih jenis makanan..',
+              DropdownSearch(
+                validator: (String? value) =>
+                    Validator().validateField(field: value!),
+                items: menuNameList,
+                onChanged: (value) {
+                  setState(() {
+                    selectedItem = value;
+                  });
+                },
+                dropdownDecoratorProps: DropDownDecoratorProps(
+                  dropdownSearchDecoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintText: 'Pilih jenis menu..',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(height: 4),
               InputFormField(
@@ -150,7 +167,9 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                 width: width,
                 child: ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) _showDialogPopup();
+                    if (_formKey.currentState!.validate()) {
+                      _showDialogPopup();
+                    }
                   },
                   child: const Text("Buat Pesanan"),
                 ),
@@ -163,7 +182,6 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
   }
 
   Future<void> _showDialogPopup() async {
-    final orderData = Provider.of<ListOrder>(context, listen: false).listOrder;
     return showDialog(
       context: context,
       barrierDismissible: false,
@@ -186,8 +204,10 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
               child: const Text(
                 'Setuju',
               ),
-              onPressed: () => Navigator.of(context)
-                  .pushNamedAndRemoveUntil(wrapperPage, (route) => false),
+              onPressed: () => Navigator.of(context).pushNamedAndRemoveUntil(
+                wrapperPage,
+                (route) => false,
+              ),
             ),
           ],
         );

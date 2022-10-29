@@ -24,11 +24,15 @@ class _DropDownFieldState extends State<DropDownField> {
       builder: (FormFieldState<String> state) {
         return InputDecorator(
           decoration: InputDecoration(
-              labelStyle: const TextStyle(color: CustomColors.neutralColor),
-              errorStyle: const TextStyle(color: Colors.red),
-              hintText: widget.hintText,
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+            filled: true,
+            fillColor: Colors.white,
+            labelStyle: const TextStyle(color: CustomColors.neutralColor),
+            errorStyle: const TextStyle(color: Colors.red),
+            hintText: widget.hintText,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+          ),
           isEmpty: (_currentSelectedValue == null) ? true : false,
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(

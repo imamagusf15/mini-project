@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project/provider/all_order.dart';
 import 'package:mini_project/utils/currency_format.dart';
+import 'package:mini_project/utils/page_route.dart';
 import 'package:provider/provider.dart';
 
-class DetailOrderPage extends StatelessWidget {
+class DetailOrderPage extends StatefulWidget {
   const DetailOrderPage({super.key});
 
+  @override
+  State<DetailOrderPage> createState() => _DetailOrderPageState();
+}
+
+class _DetailOrderPageState extends State<DetailOrderPage> {
   @override
   Widget build(BuildContext context) {
     final orderId = ModalRoute.of(context)!.settings.arguments as String;
@@ -78,11 +84,11 @@ class DetailOrderPage extends StatelessWidget {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              "Jakarta",
-              style: TextStyle(
+              orderData.orderAddress,
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
@@ -97,11 +103,11 @@ class DetailOrderPage extends StatelessWidget {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              "Tanggal 30/02/2035, 15.00 WIB",
-              style: TextStyle(
+              orderData.orderDate,
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
@@ -116,17 +122,60 @@ class DetailOrderPage extends StatelessWidget {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              "-",
-              style: TextStyle(
+              orderData.userNote == null ? "-" : orderData.userNote!,
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
           ),
+          const SizedBox(height: 32),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.redAccent,
+        onPressed: () {
+          _showDialogPopup();
+        },
+        tooltip: 'Batalkan Pesanan',
+        child: const Icon(Icons.delete),
+      ),
+    );
+  }
+
+  Future<void> _showDialogPopup() async {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Batalkan Pesanan'),
+          content: const Text(
+            'Apakah anda yakin?',
+            textAlign: TextAlign.justify,
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                'Tidak',
+                style: TextStyle(color: Colors.redAccent),
+              ),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: const Text(
+                'Ya',
+              ),
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil(wrapperPage, (route) => false);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

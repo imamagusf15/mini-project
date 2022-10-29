@@ -155,7 +155,6 @@ class HomePage extends StatelessWidget {
         backgroundColor: CustomColors.tertiaryColor,
         child: const Icon(
           Icons.add,
-          color: Colors.black,
         ),
         onPressed: () => Navigator.of(context).pushNamed(createOrderPage),
       ),

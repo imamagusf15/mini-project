@@ -30,6 +30,7 @@ class _WrapperPageState extends State<WrapperPage> {
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: CustomColors.tertiaryColor,
         selectedItemColor: CustomColors.secondaryColor,
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
