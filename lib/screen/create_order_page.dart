@@ -26,16 +26,17 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
 
   final List<String> menuNameList = [];
   String? selectedItem;
+  int i = 3;
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var width = size.width;
 
-    final menuName = Provider.of<ListMenu>(context).menuList;
+    final menu = Provider.of<ListMenu>(context).menuList;
 
-    for (int i = 0; i < menuName.length; i++) {
-      menuNameList.add(menuName.elementAt(i).menuName);
+    for (int i = 0; i < menu.length; i++) {
+      menuNameList.add(menu.elementAt(i).menuName);
     }
 
     return Scaffold(
