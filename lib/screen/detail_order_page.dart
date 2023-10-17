@@ -4,14 +4,9 @@ import 'package:mini_project/utils/currency_format.dart';
 import 'package:mini_project/utils/page_route.dart';
 import 'package:provider/provider.dart';
 
-class DetailOrderPage extends StatefulWidget {
+class DetailOrderPage extends StatelessWidget {
   const DetailOrderPage({super.key});
 
-  @override
-  State<DetailOrderPage> createState() => _DetailOrderPageState();
-}
-
-class _DetailOrderPageState extends State<DetailOrderPage> {
   @override
   Widget build(BuildContext context) {
     final orderId = ModalRoute.of(context)!.settings.arguments as String;
@@ -29,115 +24,117 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
           style: TextStyle(fontSize: 22),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
-            child: Text(
-              orderData.menuName,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+              child: Text(
+                orderData.menuName,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text("${orderData.totalOrder} buah"),
-          ),
-          const SizedBox(height: 8),
-          SizedBox(
-            height: 150,
-            width: width,
-            child: Image.asset(
-              orderData.menuImg,
-              fit: BoxFit.fitWidth,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text("${orderData.totalOrder} buah"),
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
-            child: Text(
-              "Total Harga",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+            const SizedBox(height: 8),
+            SizedBox(
+              height: 150,
+              width: width,
+              child: Image.asset(
+                orderData.menuImg,
+                fit: BoxFit.fitWidth,
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              CurrencyFormat.convertToIdr(orderData.totalPrice, 2),
-              style: const TextStyle(
-                fontSize: 16,
+            const Padding(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
+              child: Text(
+                "Total Harga",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
-            child: Text(
-              "Alamat",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                CurrencyFormat.convertToIdr(orderData.totalPrice, 2),
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              orderData.orderAddress,
-              style: const TextStyle(
-                fontSize: 16,
+            const Padding(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
+              child: Text(
+                "Alamat",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
-            child: Text(
-              "Waktu",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                orderData.orderAddress,
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              orderData.orderDate,
-              style: const TextStyle(
-                fontSize: 16,
+            const Padding(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
+              child: Text(
+                "Waktu",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
-            child: Text(
-              "Catatan",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                orderData.orderDate,
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              orderData.userNote == null ? "-" : orderData.userNote!,
-              style: const TextStyle(
-                fontSize: 16,
+            const Padding(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
+              child: Text(
+                "Catatan",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 32),
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                orderData.userNote == null ? "-" : orderData.userNote!,
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+            const SizedBox(height: 32),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.redAccent,
         onPressed: () {
-          _showDialogPopup();
+          _showDialogPopup(context);
         },
         tooltip: 'Batalkan Pesanan',
         child: const Icon(Icons.delete),
@@ -145,7 +142,7 @@ class _DetailOrderPageState extends State<DetailOrderPage> {
     );
   }
 
-  Future<void> _showDialogPopup() async {
+  Future<void> _showDialogPopup(BuildContext context) async {
     return showDialog(
       context: context,
       barrierDismissible: false,

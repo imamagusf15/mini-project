@@ -3,14 +3,9 @@ import 'package:mini_project/provider/all_order.dart';
 import 'package:mini_project/widgets/card_menu.dart';
 import 'package:provider/provider.dart';
 
-class ListOrderPage extends StatefulWidget {
+class ListOrderPage extends StatelessWidget {
   const ListOrderPage({super.key});
 
-  @override
-  State<ListOrderPage> createState() => _ListOrderPageState();
-}
-
-class _ListOrderPageState extends State<ListOrderPage> {
   @override
   Widget build(BuildContext context) {
     final orderData = Provider.of<ListOrder>(context, listen: false).listOrder;

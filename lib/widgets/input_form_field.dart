@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project/res/custom_color.dart';
-import 'package:mini_project/utils/validator.dart';
 
-class InputFormField extends StatefulWidget {
+class InputFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextEditingController controller;
   final String hintText;
@@ -23,29 +22,23 @@ class InputFormField extends StatefulWidget {
   });
 
   @override
-  State<InputFormField> createState() => _InputFormFieldState();
-}
-
-class _InputFormFieldState extends State<InputFormField> {
-  final validator = Validator();
-  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: widget.validator,
-      obscureText: widget.obscureText,
-      controller: widget.controller,
-      keyboardType: widget.keyboardType,
+      validator: validator,
+      obscureText: obscureText,
+      controller: controller,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
-        hintText: widget.hintText,
+        hintText: hintText,
         border: const OutlineInputBorder(
           borderSide: BorderSide(
             color: CustomColors.neutralColor,
           ),
         ),
-        suffixIcon: widget.suffixIcon,
-        helperText: widget.helperText,
+        suffixIcon: suffixIcon,
+        helperText: helperText,
       ),
     );
   }
