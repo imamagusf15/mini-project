@@ -1,6 +1,5 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:mini_project/provider/all_menu.dart';
 import 'package:mini_project/utils/page_route.dart';
 import 'package:mini_project/utils/validator.dart';
@@ -130,20 +129,19 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                 obscureText: false,
                 suffixIcon: IconButton(
                     onPressed: () {
-                      DatePicker.showDateTimePicker(
-                        context,
-                        currentTime: DateTime.now(),
-                        maxTime: DateTime(2025, 12, 30, 24, 0),
-                        minTime: DateTime.now(),
-                        locale: LocaleType.id,
-                        onConfirm: (time) {
-                          String selectedTime =
-                              "${time.day}-${time.month}-${time.year}, ${time.hour}:${time.minute} WIB";
-                          setState(() {
-                            waktuController.text = selectedTime;
-                          });
-                        },
+                      showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2025, 12, 30, 24, 0),
+                        locale: const Locale('id'),
                       );
+
+                      // String selectedTime =
+                      //     "${time.day}-${time.month}-${time.year}, ${time.hour}:${time.minute} WIB";
+                      // setState(() {
+                      //   waktuController.text = selectedTime;
+                      // });
                     },
                     icon: const Icon(Icons.date_range)),
               ),
